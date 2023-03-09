@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RPM_X_2.LoginPage">
+    <ContentPage.Content>
+        <StackLayout
+            Margin="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="Auto" />
+                    <ColumnDefinition
+                        Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    x:Name="statusLabel"
+                    VerticalTextAlignment="Center"
+                    FontSize="Large"
+                    Text="Вход пользователя" />
+                <Button
+                    Grid.Column="1"
+                    x:Name="regButton"
+                    Clicked="RegButton_OnClicked"
+                    Text="Reg"
+                    Margin="2"
+                    BackgroundColor="Default" />
+                <Button
+                    Grid.Column="2"
+                    x:Name="exitButton"
+                    Clicked="ExitButton_OnClicked"
+                    Text="Exit"
+                    Margin="2"
+                    BackgroundColor="Accent" />
+            </Grid>
+            <StackLayout
+                Orientation="Horizontal">
+                <Label
+                    Text="Theme choose" />
+                <Switch
+                    x:Name="ThemeSwitch"
+                    Toggled="ThemeSwitch_OnToggled" />
+            </StackLayout>
+            <StackLayout
+                Orientation="Vertical">
+                <Label
+                    x:Name="loginEntryLabel"
+                    Text="Enter login:"
+                    FontSize="Small" />
+                <Entry
+                    x:Name="loginEntry"
+                    Placeholder="Your login" />
+            </StackLayout>
+            <StackLayout
+                Orientation="Vertical">
+                <Label
+                    x:Name="passwordLabel"
+                    Text="Enter password:"
+                    FontSize="Small" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Entry
+                        x:Name="passwordEntry"
+                        Placeholder="Your password"
+                        IsPassword="{Binding Source={x:Reference Name=PasswordVisibilitySwitch}, Path=IsToggled}" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="True"
+                        x:Name="PasswordVisibilitySwitch" />
+                </Grid>
+            </StackLayout>
+            <Button
+                x:Name="LoginButton"
+                Clicked="LoginButton_OnClicked"
+                Text="Login" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

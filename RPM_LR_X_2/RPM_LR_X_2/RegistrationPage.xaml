@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RPM_X_2"
+             xmlns:converters="clr-namespace:RPM_X_2.Converters;assembly=RPM_LR_X_2"
+             x:Class="RPM_X_2.RegistrationPage">
+    <StackLayout
+        Margin="3">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                x:Name="statusLabel"
+                VerticalTextAlignment="Center"
+                FontSize="Large"
+                Text="Регистрация профиля" />
+            <Button
+                Grid.Column="1"
+                x:Name="exitButton"
+                Clicked="ExitButton_OnClicked"
+                Text="Exit"
+                BackgroundColor="Accent" />
+        </Grid>
+        <StackLayout
+            Orientation="Horizontal">
+            <Label
+                Text="Theme choose" />
+            <Switch
+                x:Name="ThemeSwitch"
+                Toggled="ThemeSwitch_OnToggled" />
+        </StackLayout>
+        <StackLayout
+            Orientation="Vertical">
+            <Label
+                x:Name="loginEntryLabel"
+                Text="Enter login:"
+                FontSize="Small" />
+            <Entry
+                x:Name="loginEntry"
+                Placeholder="{Binding User.Login}" />
+        </StackLayout>
+        <StackLayout
+            Orientation="Vertical">
+            <Label
+                x:Name="passwordLabel"
+                Text="Enter password:"
+                FontSize="Small" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry
+                    x:Name="passwordEntry"
+                    Placeholder="{Binding User.Password}"
+                    IsPassword="{Binding Source={x:Reference Name=PasswordVisibilitySwitch}, Path=IsToggled}" />
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="True"
+                    x:Name="PasswordVisibilitySwitch" />
+            </Grid>
+        </StackLayout>
+        <StackLayout
+            Orientation="Vertical"
+            IsVisible="{Binding IsEdit, Converter={x:Static converters:InverseBoolConverter.Instance}}">
+            <Label
+                x:Name="repeatPasswordLabel"
+                Text="Repeat password:"
+                FontSize="Small" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry
+                    x:Name="repeatPassword"
+                    Placeholder="Repeat your password"
+                    IsPassword="{Binding Source={x:Reference Name=PasswordRepeatVisibilitySwitch}, Path=IsToggled}" />
+                <Switch
+                    Grid.Column="1"
+                    IsToggled="True"
+                    x:Name="PasswordRepeatVisibilitySwitch" />
+            </Grid>
+        </StackLayout>
+        <StackLayout
+            Orientation="Vertical">
+            <Label
+                x:Name="phoneEntryLabel"
+                Text="Enter phone number:"
+                FontSize="Small"/>
+            <Entry
+                x:Name="phoneEntry"
+                Placeholder="{Binding User.PhoneNumber}" 
+                Keyboard="Telephone"/>
+        </StackLayout>
+        <StackLayout
+            Orientation="Vertical"
+            IsVisible="{Binding IsEdit}">
+            <Label
+                x:Name="rolePickerLabel"
+                Text="Choose role:"
+                FontSize="Small" />
+            <Picker
+                x:Name="rolePicker"
+                ItemsSource="{Binding RoleEnums}"
+                SelectedItem="{Binding User.Role}"/>
+        </StackLayout>
+        <StackLayout
+            Orientation="Vertical">
+            <Label
+                x:Name="birthDatePickerLabel"
+                Text="Choose birth date:"
+                FontSize="Small" />
+            <DatePicker
+                x:Name="birthDatePicker"
+                Date="{Binding User.BirthDate}">
+            </DatePicker>
+        </StackLayout>
+        <Button
+            x:Name="RegistrationButton"
+            Clicked="RegistrationButton_OnClicked"
+            Text="Registration" />
+    </StackLayout>
+</ContentPage>

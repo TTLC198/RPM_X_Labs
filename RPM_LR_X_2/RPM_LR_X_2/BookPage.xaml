@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:RPM_X_2.Converters;assembly=RPM_LR_X_2"
+             x:Class="RPM_X_2.BookPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*"/>
+                    <ColumnDefinition
+                        Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Column="0"
+                    Orientation="Vertical">
+                    <Entry
+                        Text="{Binding Book.Name}"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Start"
+                        InputTransparent="{Binding IsEditable, Converter={x:Static converters:InverseBoolConverter.Instance}}"/>
+                    <Entry
+                        Text="{Binding Book.Author}"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        InputTransparent="{Binding IsEditable, Converter={x:Static converters:InverseBoolConverter.Instance}}"/>
+                </StackLayout>
+                <Button
+                    Grid.Column="1"
+                    x:Name="backButton"
+                    Clicked="BackButton_OnClicked"
+                    Text="Back"
+                    BackgroundColor="Accent" />
+            </Grid>
+            <Frame
+                Grid.Row="1"
+                Margin="3"
+                BorderColor="Black"
+                BackgroundColor="Default">
+                <ScrollView>
+                    <Editor
+                        InputTransparent="{Binding IsEditable, Converter={x:Static converters:InverseBoolConverter.Instance}}"
+                        Text="{Binding Book.Text}"/>
+                </ScrollView>
+            </Frame>
+            <Button
+                x:Name="SaveButton"
+                Grid.Row="2"
+                Margin="3"
+                IsVisible="{Binding IsEditable}"
+                Text="Save changes"
+                Clicked="SaveButton_OnClicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

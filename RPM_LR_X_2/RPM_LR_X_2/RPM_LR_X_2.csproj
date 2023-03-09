@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+        <PackageReference Include="Xamarin.Forms.Theme.Dark" Version="1.0.0.43-pre1" />
+        <PackageReference Include="Xamarin.Forms.Theme.Light" Version="1.0.0.43-pre1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\null-avatar.png" />
+      <Resource Include="Resources\null-avatar.png" />
+    </ItemGroup>
+</Project>

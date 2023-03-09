@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:RPM_X_2.Models;assembly=RPM_LR_X_2"
+             x:Name="UserPageContent"
+             x:Class="RPM_X_2.UserPage">
+    <ContentPage.Content>
+        <Grid
+            Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                        Grid.Column="0">
+                        <ImageButton
+                            x:Name="UserPhotoChangeButton"
+                            Source="{Binding User.Photo}"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            BackgroundColor="Transparent"
+                            Clicked="UserPhotoChangeButton_OnClicked"/>
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Column="1"
+                        Orientation="Horizontal">
+                        <Label
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center"
+                            Text="Theme choose" />
+                        <Switch
+                            x:Name="ThemeSwitch"
+                            Toggled="ThemeSwitch_OnToggled" />
+                    </StackLayout>
+                    <Button
+                        Grid.Column="2"
+                        x:Name="exitButton"
+                        Clicked="ExitButton_OnClicked"
+                        Text="Exit"
+                        BackgroundColor="Accent" />
+                </Grid>
+            </StackLayout>
+            <ScrollView
+                Grid.Row="1">
+                <StackLayout
+                    Orientation="Vertical">
+                    <ListView
+                        Grid.Row="1"
+                        x:Name="booksListView"
+                        ItemsSource="{Binding Books}"
+                        SelectedItem="{Binding SelectedBook, Mode=TwoWay}"
+                        SelectionMode="None"
+                        HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <StackLayout
+                                            Orientation="Vertical">
+                                            <StackLayout
+                                                Orientation="Vertical">
+                                                <Label
+                                                    Text="{Binding Name}"
+                                                    FontSize="Medium" />
+                                                <Label
+                                                    Text="{Binding Author}"
+                                                    FontSize="Small" />
+                                            </StackLayout>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition
+                                                        Width="*" />
+                                                    <ColumnDefinition
+                                                        Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Button
+                                                    x:Name="ReadOnlineButton"
+                                                    Margin="3"
+                                                    Text="Read"
+                                                    CommandParameter="{Binding ID}"
+                                                    Clicked="ReadOnlineButton_OnClicked" />
+                                                <Button
+                                                    Grid.Column="1"
+                                                    x:Name="SaveBookButton"
+                                                    Margin="3"
+                                                    Text="Save"
+                                                    CommandParameter="{Binding ID}"
+                                                    Clicked="SaveBookButton_OnClicked" />
+                                            </Grid>
+                                            <Grid
+                                                x:Name="EditBookControls"
+                                                IsVisible="{Binding Path=BindingContext.IsLibrarian, Source={x:Reference Name=UserPageContent}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition
+                                                        Width="*" />
+                                                    <ColumnDefinition
+                                                        Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Button
+                                                    x:Name="EditBookButton"
+                                                    Margin="3"
+                                                    Text="Edit"
+                                                    CommandParameter="{Binding ID}"
+                                                    Clicked="EditBookButton_OnClicked" />
+                                                <Button
+                                                    Grid.Column="1"
+                                                    x:Name="RemoveBookButton"
+                                                    Margin="3"
+                                                    BackgroundColor="Accent"
+                                                    Text="Remove"
+                                                    CommandParameter="{Binding ID}"
+                                                    Clicked="RemoveBookButton_OnClicked" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView
+                        x:Name="usersListView"
+                        ItemsSource="{Binding Users}"
+                        SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                        SelectionMode="None"
+                        HasUnevenRows="True"
+                        IsVisible="{Binding IsAdmin}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <StackLayout
+                                            Orientation="Vertical">
+                                            <StackLayout
+                                                Orientation="Vertical">
+                                                <Label
+                                                    Text="{Binding Login}"
+                                                    FontSize="Medium" />
+                                                <Label
+                                                    Text="{Binding About}"
+                                                    FontSize="Small" />
+                                            </StackLayout>
+                                            <Grid
+                                                x:Name="EditUserControls">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition
+                                                        Width="*" />
+                                                    <ColumnDefinition
+                                                        Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Button
+                                                    x:Name="EditUserButton"
+                                                    Margin="3"
+                                                    Text="Edit"
+                                                    CommandParameter="{Binding ID}"
+                                                    Clicked="EditUserButton_OnClicked" />
+                                                <Button
+                                                    Grid.Column="1"
+                                                    x:Name="RemoveUserButton"
+                                                    Margin="3"
+                                                    BackgroundColor="Accent"
+                                                    Text="Remove"
+                                                    CommandParameter="{Binding ID}"
+                                                    Clicked="RemoveUserButton_OnClicked" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+            <Button
+                Grid.Row="2"
+                IsVisible="{Binding IsLibrarian}"
+                x:Name="AddBookButton"
+                Margin="3"
+                Text="Add"
+                Clicked="AddBookButton_OnClicked" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
